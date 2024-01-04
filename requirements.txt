@@ -1,0 +1,8 @@
+python-socketio==5.8.0
+nicegui==1.3.16
+scipy
+netifaces
+matplotlib
+opencv-python
+rosbags
+pypcd4

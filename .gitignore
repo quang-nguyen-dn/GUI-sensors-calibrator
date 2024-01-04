@@ -1,0 +1,16 @@
+# Python caching
+*.pyc
+*.pyd
+*.pyo
+*__pycache__/
+
+# Temp
+*build/
+pybind11_cpp_test/
+debug/*
+
+# Jupyter & Spyder stuff
+.ipynb_checkpoints/
+.Trash-*/
+/.spyderproject
+*.bag
