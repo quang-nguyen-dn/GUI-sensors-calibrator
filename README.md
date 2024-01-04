@@ -31,24 +31,24 @@ The programme supports both input data in rosbag1 and rosbag2 formats.
     ├── rosbags
     │   ├── {rosbag1-no.1}.bag
     │   ├── {...}.bag
-    │   ├── {rosbag1-no.n}.bag
+    │   ├── {rosbag1-no.m}.bag
     │   │
     │   │── {rosbag2-no.1}
     │   │   └── Rosbag2 no. 1 content files
     │   ├── {rosbag2-...}
-    │   └── {rosbag2-no.m}
-    │       └── Rosbag2 no. 2 content files
+    │   └── {rosbag2-no.n}
+    │       └── Rosbag2 no. n content files
     └── calib
         └── {FIRST_CAM_NAME} (rgb_0)
             ├── intrinsics.json (Camera intrinsics parameters, if available)
             ├── imgs
             │   ├── 0.png
             │   ├── 1.png
-            │   ├── 2.png
+            │   └── 2.png
             ├── {FIRST_LIDAR_NAME} (livox)
             │   ├── 0.npy
             │   ├── 1.npy
-            │   ├── 2.npy
+            │   └── 2.npy
             └── {SECOND_LIDAR_NAME} (os128)
                 ├── 0.npy
                 ├── 1.npy
