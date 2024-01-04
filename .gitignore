@@ -3,6 +3,7 @@
 *.pyd
 *.pyo
 *__pycache__/
+.vscode/
 
 # Temp
 *build/
