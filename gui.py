@@ -1599,22 +1599,24 @@ class CalibrationGUI:
             self.edit_data_dir_button.disable()
 
         with self.sidebar:
-            self.data_dir_input = ui.input(label='Data directory').bind_value(self, 'data_dir').props('clearable filled')
-            def data_dir_input_enter(e):
-                if e.args['key'] == 'Enter':
-                    self.make_load_data_from_file_tab()
-            self.data_dir_input.on('keydown', lambda e: data_dir_input_enter(e))
-
-            # ui.html("<p>&nbsp<p>")
-            # with ui.grid(columns=3):
-                # self.load_file_button = ui.button('Load file', on_click=lambda:self.make_load_data_from_file_tab())
-                # self.load_rosbag_button = ui.button('Load rosbags', on_click=lambda:self.make_rosbag_load_tab())
-                # self.edit_data_dir_button = ui.button('Edit directory', on_click=do_edit_dir)
-                # self.edit_data_dir_button.disable()
-
-            # ui.html("<p>&nbsp<p>"); ui.separator(); ui.html("<p>&nbsp<p>")
-            # ui.label('Chessboard target dimensions:').style('font-weight: bold')
-            # ui.html("<p>&nbsp</p>"); ui.html("<p>&nbsp</p>")
+            init_parent_dir = os.path.dirname(self.data_dir)
+            self.data_dir_input = ui.select(
+                options=[os.path.join(init_parent_dir, dir) for dir in sorted(os.listdir(init_parent_dir))],
+                label='Data directory',
+                value=self.data_dir, with_input=True,
+            ).bind_value_to(self, 'data_dir').props('filled')
+            def data_dir_input_on_type(e):
+                current_data_dir = e.args[0]
+                if current_data_dir == '': return
+                parent_dir = os.path.dirname(current_data_dir)
+                try:
+                    children_dirs = sorted(os.listdir(parent_dir))
+                    suggestions = [os.path.join(parent_dir, dir) for dir in children_dirs]
+                    self.data_dir_input.set_options(suggestions)
+                except:
+                    return
+            self.data_dir_input.on('filter', lambda e: data_dir_input_on_type(e))
+            
             ui.html("<p>&nbsp</p>")
             self.chessboard_configs_expansion = ui.expansion(
                 'Chessboard target dimensions', icon='settings', value=True
